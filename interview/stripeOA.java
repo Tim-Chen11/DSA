@@ -190,6 +190,10 @@ public final class Main {
 
         Collections.sort(flagged);
         System.out.println(String.join(",", flagged));
+
+
+        // map.entrySet().removeIf(e -> e.getValue() == 0);
+
     }
 
     /* ─────────────────────── helpers ─────────────────────── */
