@@ -194,6 +194,29 @@ public final class Main {
 
         // map.entrySet().removeIf(e -> e.getValue() == 0);
 
+        // void levelOrder(TreeNode root) {
+        //     if (root == null) return;
+        //     Queue<TreeNode> queue = new LinkedList<>();
+        //     queue.add(root);
+        
+        //     while (!queue.isEmpty()) {
+        //         TreeNode node = queue.poll();
+        //         System.out.println(node.val);
+        
+        //         if (node.left != null) queue.add(node.left);
+        //         if (node.right != null) queue.add(node.right);
+        //     }
+        // }
+
+        // void postorder(TreeNode root) {
+        //     if (root == null) return;
+        
+        //     postorder(root.left);           // visit left
+        //     postorder(root.right);          // visit right
+        //     System.out.println(root.val);   // visit node
+        // }
+        
+
     }
 
     /* ─────────────────────── helpers ─────────────────────── */
