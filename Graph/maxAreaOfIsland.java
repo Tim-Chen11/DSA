@@ -95,7 +95,7 @@ public class Main {
                 if(!visited[nextX][nextY] && map[nextX][nextY]){
                     visited[nextX][nextY] = true;
                     count++;
-                    deque.addLast(int[]{nextX,nextY});
+                    deque.addLast(new int[]{nextX,nextY});
                 }
             }
             
