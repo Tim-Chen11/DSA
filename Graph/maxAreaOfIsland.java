@@ -48,59 +48,56 @@ public class Main{
 
 public class Main {
 
-    static final int[][] dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    static int result = 0;
-    static int count = 0;
+    static final int[][] dir = {{0,1},{1,0},{0,-1},{-1,0}};
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
+        int n = scanner.nextInt(); // rows
+        int m = scanner.nextInt(); // cols
         int[][] map = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
                 map[i][j] = scanner.nextInt();
-            }
-        }
+
         boolean[][] visited = new boolean[n][m];
+        int result = 0;
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (!visited[i][j] && map[i][j] == 1) {
-                    count = 0;
-                    bfs(map, visited, i, j);
-                    result = Math.max(count, result);
-
+                    int size = bfs(map, visited, i, j);
+                    result = Math.max(result, size);
                 }
             }
         }
         System.out.println(result);
     }
 
-    static void bfs(int[][] map, boolean[][] visited, int x, int y){
-        Deque<int[]> deque = new ArrayDeque<>();
-        deque.addLast(new int[]{x,y});
-        visited[x][y] = true;
+    static int bfs(int[][] map, boolean[][] visited, int sx, int sy) {
+        int rows = map.length, cols = map[0].length;
+        Deque<int[]> dq = new ArrayDeque<>();
+        dq.addLast(new int[]{sx, sy});
+        visited[sx][sy] = true;
 
-        while(!deque.isEmpty()){
-            int[] cur = deque.pollFirst();
+        int size = 1; // count the starting cell
 
-            for(int i=0;i<4;i++){
-                int nextX = cur[0]+dir[i][0];
-                int nextY = cur[1]+dir[i][1];
+        while (!dq.isEmpty()) {
+            int[] cur = dq.pollFirst();
+            int x = cur[0], y = cur[1];
 
-                if(nextX<0||nextX>map.length-1||nextY<0||nextY>map[i].length-1){
-                    continue;
-                }
+            for (int[] d : dir) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 0 || nx >= rows || ny < 0 || ny >= cols) continue;
 
-                if(!visited[nextX][nextY] && map[nextX][nextY]){
-                    visited[nextX][nextY] = true;
-                    count++;
-                    deque.addLast(new int[]{nextX,nextY});
+                if (!visited[nx][ny] && map[nx][ny] == 1) {
+                    visited[nx][ny] = true;
+                    size++;
+                    dq.addLast(new int[]{nx, ny});
                 }
             }
-            
         }
-
+        return size;
     }
 }
 
